@@ -75,7 +75,7 @@ namespace series_analyzer
                         minNum();
                         break;
                     case "g":
-                        averege();
+                        average();
                         break;
                     case "h":
                         somNumbers();
@@ -97,7 +97,8 @@ namespace series_analyzer
 
         {
             Console.WriteLine("entar new series");
-            Console.ReadLine();
+            string[] input = Console.ReadLine().Split(' ');
+            numbers = chekinArgs(input);
         }
         static void showSereies()
         {
@@ -117,6 +118,7 @@ namespace series_analyzer
         {
             for (int i = 0; i < numbers.Count-1; i++)
             {
+                bool flags = false;
                 for (int j = 0; j < numbers.Count - i - 1; j++)
                 {
                     if (numbers[j] > numbers[j + 1])
@@ -124,10 +126,15 @@ namespace series_analyzer
                         int temp = numbers[j];
                         numbers[j] = numbers[j + 1];
                         numbers[j + 1] = temp;
+                        flags = true;
                     }
+                }if (!flags)
+                {
+                    break;
                 }
-                
+       
             }
+
             foreach (int num in numbers)
                 Console.Write(" "  + num);
         }
@@ -153,14 +160,14 @@ namespace series_analyzer
                 }
             Console.WriteLine($"the lwo num is:{min}");  
         }
-        static void averege()
+        static void average()
         {
             int number = 0;
             foreach (int num in numbers)
             {
                 number += num;
             }    
-            int total = number / 2;
+            int total = number / numbers.Count;
             Console.WriteLine($" the averege is:{total}");
 
 
@@ -190,7 +197,6 @@ namespace series_analyzer
             Console.ReadLine();
         }
         
-
         static void Main(string[] args)
         {
             numbers = chekinArgs(args);
