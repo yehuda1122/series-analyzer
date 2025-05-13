@@ -14,13 +14,12 @@ namespace series_analyzer
             {
                 List<int> numbers;
 
-                while (true)
+                while(true)
                 {
                     numbers = new List<int>();
 
                     foreach (string arg in args1)
                     {
-
                         if (int.TryParse(arg, out int num) && num > 0)
                         {
                             numbers.Add(num);
@@ -37,7 +36,7 @@ namespace series_analyzer
             }
         static void showMenu(List<int> number)
         {
-            Console.WriteLine("menu:\na.Input a Series. (Replace the current series)");
+            Console.WriteLine("\nmenu:\na.Input a Series. (Replace the current series)");
             Console.WriteLine("b. Display the series in the order it was entered. ");
             Console.WriteLine("c. Display the series in the reversed order it was entered. ");
             Console.WriteLine("d. Display the series in sorted order (from low to high). ");
@@ -50,20 +49,19 @@ namespace series_analyzer
         }
         static void start()
         {
-            while (true)
+            string choose = "";
+            while (choose != "j")
             {
                 showMenu(numbers);
-                string choose = Console.ReadLine();
+                choose = Console.ReadLine();
                 switch (choose)
                 {
                     case "a":
                         changeSeries();
                         break;
-
                     case "b": 
                         showSereies();
                         break;
-
                     case "c":
                         revers();
                         break;
@@ -88,6 +86,9 @@ namespace series_analyzer
                     case "j":
                         exit();
                         break;
+                    default:
+                        Console.WriteLine("You have to choose only the letters 'a-j'");
+                        break;
                 }   
 
             }
@@ -98,23 +99,20 @@ namespace series_analyzer
             Console.WriteLine("entar new series");
             Console.ReadLine();
         }
-
         static void showSereies()
         {
             foreach (int number in numbers)
             {
-                Console.Write(number);
+                Console.Write(" " + number);
             }
         }
-
         static void revers()
         {
             for (int i = numbers.Count  -1; i >= 0; i--)
             {
-                Console.Write(numbers[i]);
+                Console.Write(" " + numbers[i]);
             }
         }
-
         static void sorted()
         {
             for (int i = 0; i < numbers.Count-1; i++)
@@ -131,9 +129,8 @@ namespace series_analyzer
                 
             }
             foreach (int num in numbers)
-                Console.WriteLine(num);
+                Console.Write(" "  + num);
         }
-
         static void maxNum()
         {
             int max = 0;
@@ -146,7 +143,6 @@ namespace series_analyzer
             }
             Console.WriteLine($"the hight num is:{max}");
         }
-
         static void minNum()
         {
             int min = numbers[0];
@@ -191,14 +187,16 @@ namespace series_analyzer
         static void exit()
         {
             Console.WriteLine("good lack");
+            Console.ReadLine();
         }
+        
 
         static void Main(string[] args)
         {
             numbers = chekinArgs(args);
             start();
-        }
-    }
-       
+        }   
+    }      
 }
+
 
