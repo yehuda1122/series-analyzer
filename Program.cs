@@ -9,6 +9,7 @@ namespace series_analyzer
 {
     internal class Program
     {
+        static List<int> numbers;
         static List<int> chekinArgs(string[] args1)
             {
                 List<int> numbers;
@@ -35,8 +36,6 @@ namespace series_analyzer
                 }
             }
         static void showMenu(List<int> number)
-
-
         {
             Console.WriteLine("menu:\na.Input a Series. (Replace the current series)");
             Console.WriteLine("b. Display the series in the order it was entered. ");
@@ -49,11 +48,157 @@ namespace series_analyzer
             Console.WriteLine("i. Display the Sum of the series. ");
             Console.WriteLine("j. Exit. ");
         }
+        static void start()
+        {
+            while (true)
+            {
+                showMenu(numbers);
+                string choose = Console.ReadLine();
+                switch (choose)
+                {
+                    case "a":
+                        changeSeries();
+                        break;
+
+                    case "b": 
+                        showSereies();
+                        break;
+
+                    case "c":
+                        revers();
+                        break;
+                    case "d":
+                        sorted();
+                        break;
+                    case "e":
+                        maxNum();
+                        break;
+                    case "f":
+                        minNum();
+                        break;
+                    case "g":
+                        averege();
+                        break;
+                    case "h":
+                        somNumbers();
+                        break;
+                    case "i":
+                        totalnumbers();
+                        break;
+                    case "j":
+                        exit();
+                        break;
+                }   
+
+            }
+        }
+        static void changeSeries()
+
+        {
+            Console.WriteLine("entar new series");
+            Console.ReadLine();
+        }
+
+        static void showSereies()
+        {
+            foreach (int number in numbers)
+            {
+                Console.Write(number);
+            }
+        }
+
+        static void revers()
+        {
+            for (int i = numbers.Count  -1; i >= 0; i--)
+            {
+                Console.Write(numbers[i]);
+            }
+        }
+
+        static void sorted()
+        {
+            for (int i = 0; i < numbers.Count-1; i++)
+            {
+                for (int j = 0; j < numbers.Count - i - 1; j++)
+                {
+                    if (numbers[j] > numbers[j + 1])
+                    {
+                        int temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+                
+            }
+            foreach (int num in numbers)
+                Console.WriteLine(num);
+        }
+
+        static void maxNum()
+        {
+            int max = 0;
+            foreach (int num in numbers) 
+            {
+                if (num > max)
+                {
+                    max = num;
+                }
+            }
+            Console.WriteLine($"the hight num is:{max}");
+        }
+
+        static void minNum()
+        {
+            int min = numbers[0];
+            foreach(int num in numbers)
+                if (num < min)
+                {
+                    min = num;
+                }
+            Console.WriteLine($"the lwo num is:{min}");  
+        }
+        static void averege()
+        {
+            int number = 0;
+            foreach (int num in numbers)
+            {
+                number += num;
+            }    
+            int total = number / 2;
+            Console.WriteLine($" the averege is:{total}");
+
+
+     
+        }
+        static void somNumbers()
+        {
+            int number = 0;
+            foreach(int num in numbers)
+                { 
+                number += 1;
+            }
+            Console.WriteLine($"the som of numbers is:{ number}");
+        }
+        static void totalnumbers()
+        {
+            int som = 0;
+            foreach(int num in numbers)
+            {
+                som += num;
+            }
+            Console.WriteLine($"the som all num is:{som}");
+        }
+        static void exit()
+        {
+            Console.WriteLine("good lack");
+        }
+
         static void Main(string[] args)
         {
-           List<int> numbers = chekinArgs(args);
-           showMenu(numbers);
+            numbers = chekinArgs(args);
+            start();
         }
     }
        
 }
+
